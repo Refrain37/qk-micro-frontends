@@ -1,21 +1,14 @@
 <template>
-  <div class="app-wrapper">
-    <sidebar></sidebar>
-    <app-main />
+  <div class="app-main-container">
+    <router-view/>
+    <div id="subapp-container"></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {Navbar,AppMain,Sidebar} from './components'
-
 
 export default defineComponent({
-  components:{
-    Navbar,
-    AppMain,
-    Sidebar
-  },
   setup () {
     
 

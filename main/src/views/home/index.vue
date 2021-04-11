@@ -1,21 +1,13 @@
 <template>
-  <div class="app-wrapper">
-    <sidebar></sidebar>
-    <app-main />
+  <div>
+    home
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import {Navbar,AppMain,Sidebar} from './components'
-
 
 export default defineComponent({
-  components:{
-    Navbar,
-    AppMain,
-    Sidebar
-  },
   setup () {
     
 
