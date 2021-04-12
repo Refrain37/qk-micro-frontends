@@ -1,22 +1,18 @@
 <template>
-  <div class="app-main-container">
-    <router-view/>
+  <section class="app-main-container">
+    <router-view />
     <div id="subapp-container"></div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
-    
-
+  setup() {
     return {}
   }
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
