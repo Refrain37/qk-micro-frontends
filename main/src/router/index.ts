@@ -1,17 +1,16 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Layout from '../layout/index.vue'
 import Home from '../views/home/index.vue'
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
-    path:'/',
-    name:'Home',
-    component:Home
+    path: '/',
+    name: 'Home',
+    component: Home
   },
   {
-    path:'/login',
-    name:'login',
-    component:() => import('../views/login/index.vue')
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/login/index.vue')
   }
 ]
 

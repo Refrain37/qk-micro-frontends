@@ -15,4 +15,11 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.app-main-container {
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+</style>

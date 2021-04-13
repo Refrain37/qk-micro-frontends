@@ -1,7 +1,12 @@
 <template>
   <div class="sidebar-item">
     <div class="link">
-      <router-link class="router-link" :to="path" :name="name">
+      <router-link
+        class="router-link"
+        :class="{ 'router-link-active': match }"
+        :to="path"
+        :name="name"
+      >
         {{ name }}
       </router-link>
     </div>
@@ -9,15 +14,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
   props: {
     name: String,
     path: String
   },
-  setup() {
-    return {}
+  setup(props) {
+    const { path } = props
+    const match = computed(() => {
+      return path === useRoute().path
+    })
+    return {
+      match
+    }
   }
 })
 </script>
@@ -31,13 +43,19 @@ export default defineComponent({
   width: 100%;
   padding: 0 20px;
   box-sizing: border-box;
-  font-size: 14px;
   cursor: pointer;
 }
 .sidebar-item:hover {
   background-color: #263445;
 }
 .router-link {
+  height: 55px !important;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 55px;
   color: rgb(191, 203, 217);
+}
+.router-link-active {
+  color: rgb(64, 158, 255);
 }
 </style>

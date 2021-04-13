@@ -7,15 +7,13 @@ import { defineComponent } from 'vue'
 import Layout from './layout/index.vue'
 
 export default defineComponent({
-  components:{
+  components: {
     Layout
   },
-  setup () {
+  setup() {
     return {}
   }
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

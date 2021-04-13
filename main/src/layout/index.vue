@@ -35,7 +35,11 @@ export default defineComponent({
   .main-container {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    position: relative;
+    margin-left: 210px;
+    min-height: 100%;
+    width: calc(100% - 210px);
+    overflow: hidden;
   }
 }
 </style>

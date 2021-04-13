@@ -4,11 +4,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-let instance: any = null
-
 function render(props: any = {}) {
   const { container } = props
-  instance = createApp(App)
+  createApp(App)
     .use(store)
     .use(router)
     .mount(
@@ -24,11 +22,12 @@ const isQiankun = temp.__POWERED_BY_QIANKUN__
 isQiankun || render()
 
 export async function bootstrap() {
-  console.log('%c ', 'color: green;', 'vue3.0 app bootstraped')
+  console.log('[child1-app]: bootstraped')
 }
 
 export async function mount(props: any) {
-  console.log(props)
+  const { getGlobalState, setGlobalState } = props
+  setGlobalState({ user: 'qiankun-child1', age: 18 })
   render(props)
 }
 

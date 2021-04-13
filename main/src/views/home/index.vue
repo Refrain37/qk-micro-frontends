@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home-container">
     home
   </div>
 </template>
@@ -8,14 +8,16 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
-    
-
+  setup() {
     return {}
   }
 })
 </script>
 
 <style scoped>
-
+.home-container {
+  height: 1000px;
+  width: 2000px;
+  background-color: green;
+}
 </style>
