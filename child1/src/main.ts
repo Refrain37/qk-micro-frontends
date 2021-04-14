@@ -3,8 +3,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import { isSingle } from './micro'
+export { bootstrap, mount, unmount } from './micro'
 
-function render(props: any = {}) {
+export function render(props: any = {}) {
   const { container } = props
   createApp(App)
     .use(store)
@@ -17,18 +19,6 @@ function render(props: any = {}) {
 }
 
 // 独立运行时
-const temp: any = window
-const isQiankun = temp.__POWERED_BY_QIANKUN__
-isQiankun || render()
-
-export async function bootstrap() {
-  console.log('[child1-app]: bootstraped')
+if (isSingle) {
+  render()
 }
-
-export async function mount(props: any) {
-  const { getGlobalState, setGlobalState } = props
-  setGlobalState({ user: 'qiankun-child1', age: 18 })
-  render(props)
-}
-
-export async function unmount(props: any) {}

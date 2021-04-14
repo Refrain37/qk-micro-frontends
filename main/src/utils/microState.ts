@@ -1,7 +1,7 @@
 import { initGlobalState } from 'qiankun'
 import { reactive, watchEffect } from 'vue'
 
-const initialState: any = reactive({ user: 'qiankun-micro' })
+const initialState: any = reactive({ user: 'qiankun-micro-main' })
 
 const actions = initGlobalState(initialState)
 
@@ -19,5 +19,5 @@ actions.onGlobalStateChange((newState, oldState) => {
 export default actions
 
 // extend
-export const getGlobalState = (key: string) =>
+export const getGlobalState = (key?: string) =>
   key ? initialState[key] : initialState
