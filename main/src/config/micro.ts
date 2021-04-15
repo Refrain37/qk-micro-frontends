@@ -1,3 +1,9 @@
+export const microState = {
+  user: 'qiankun',
+  token: ''
+}
+
+/* micro-app routes */
 export interface IRoute {
   name: string
   path: string
@@ -20,8 +26,8 @@ const child2Routes: IRoute[] = [
     path: '/child2/'
   },
   {
-    name: 'child2-test',
-    path: '/child2/test'
+    name: 'child2-show',
+    path: '/child2/show'
   }
 ]
 

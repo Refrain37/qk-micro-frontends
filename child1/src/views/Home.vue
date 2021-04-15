@@ -13,7 +13,7 @@
     name: 'Home',
     setup() {
       const state = useStore().state
-      const user = state.microState.user
+      const user = (state.microState && state.microState.user) || 'null'
       return {
         user,
       }

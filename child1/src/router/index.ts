@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
-import '../public-path'
+import { isSingle } from '../micro'
+import { activeRule } from '../config/micro'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/test',
@@ -14,13 +15,14 @@ const routes: Array<RouteRecordRaw> = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/test.vue')
-  }
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/test.vue'),
+  },
 ]
 
 const router = createRouter({
-  history: createWebHistory('/child1'),
-  routes
+  history: createWebHistory(isSingle ? '/' : activeRule),
+  routes,
 })
 
 export default router

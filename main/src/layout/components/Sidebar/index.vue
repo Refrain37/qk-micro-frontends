@@ -13,7 +13,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 import SidebarItem from '../Sidebar/SidebarItem.vue'
-import { IRoute } from '../../../config/microRoutes'
+import { IRoute } from '../../../config/micro'
 import { getRoutes } from '../../../utils/getRoutes'
 
 export default defineComponent({

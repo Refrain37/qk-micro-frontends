@@ -1,7 +1,8 @@
 import { initGlobalState } from 'qiankun'
-import { reactive, watchEffect } from 'vue'
+import { reactive } from 'vue'
+import { microState } from '../config/micro'
 
-const initialState: any = reactive({ user: 'qiankun-micro-main' })
+const initialState: any = reactive(microState)
 
 const actions = initGlobalState(initialState)
 

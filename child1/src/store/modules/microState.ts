@@ -14,19 +14,10 @@ export default function registerMicroStateModule(props: any) {
         state = newState
         setGlobalState(newState) // set global state
       },
-      UPDATE_MICRO_STATE(state: any) {
-        state = (getGlobalState && getGlobalState()) || {
-          user: 'qiankun-micro-child1',
-        }
-        console.log(state)
-      },
     }
     const actions = {
       setMicroState({ commit }: any, newState: any) {
         commit('SET_MICRO_STATE', newState)
-      },
-      updateMicroState({ commit }: any) {
-        commit('UPDATE_MICRO_STATE')
       },
     }
     const microStateModule = {
@@ -37,6 +28,6 @@ export default function registerMicroStateModule(props: any) {
     }
     store.registerModule(moduleName, microStateModule)
   } else {
-    // store.dispatch('updateMicroState')
+    console.log('micro state module has been exist')
   }
 }
