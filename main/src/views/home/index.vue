@@ -2,20 +2,40 @@
   <div class="home-container">
     <h1>home page</h1>
     <button @click="setState">setState</button>
+    <button @click="addState">addState</button>
+    <button @click="updateState">updateState</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import microState, { getGlobalState } from '../../utils/microState'
+import { defineComponent, reactive, watchEffect } from 'vue'
+import microState, {
+  getGlobalState,
+  addGlobalState,
+  updateGlobalState
+} from '../../utils/microState'
 
 export default defineComponent({
   setup() {
+    console.log(getGlobalState())
     const setState = () => {
-      microState.setGlobalState({ user: 'qiankun-micro-main-change', age: 18 })
+      microState.setGlobalState({ user: 'change!!!' })
+      console.log(getGlobalState())
     }
+    const addState = () => {
+      addGlobalState({ test: 'test' })
+      console.log(getGlobalState())
+    }
+
+    const updateState = () => {
+      updateGlobalState('token', '123')
+      console.log(getGlobalState())
+    }
+
     return {
-      setState
+      setState,
+      addState,
+      updateState
     }
   }
 })

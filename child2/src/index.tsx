@@ -5,13 +5,13 @@ import './styles/index.css'
 import App from './App';
 
 import { createStore } from 'redux';
-import rootReducer from './reducers/rootReducer';
 import { Provider } from 'react-redux';
+import rootReducer from './reducers/rootReducer';
 
 import { isSingle } from './micro'
 export { bootstrap, mount, unmount } from './micro'
 
-const store = createStore(rootReducer)
+export const store = createStore(rootReducer)
 
 export function render() {
   ReactDOM.render(

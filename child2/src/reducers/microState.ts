@@ -8,11 +8,13 @@ export default function microState(
   const actions = getActions()
   switch (action.type) {
     case microStateAcionTypes.GET:
-      return actions?.getGlobalState()
+      return state || actions?.getGlobalState()
+
     case microStateAcionTypes.SET:
       return typeof action.payload === 'object'
         ? actions?.setGlobalState(action.payload)
         : state
+
     default:
       return state
   }

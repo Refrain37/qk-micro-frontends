@@ -10,7 +10,7 @@ export interface IMicroStateAction {
 
 export function setMicroState(payload: any): IMicroStateAction {
   return {
-    type: microStateAcionTypes.GET,
+    type: microStateAcionTypes.SET,
     payload,
   }
 }
