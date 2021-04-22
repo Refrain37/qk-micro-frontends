@@ -1,5 +1,6 @@
 <template>
   <layout></layout>
+  <div id="login" class="login"></div>
 </template>
 
 <script lang="ts">
@@ -16,4 +17,11 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+</style>

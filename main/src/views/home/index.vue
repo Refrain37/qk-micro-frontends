@@ -17,7 +17,7 @@ import microState, {
 
 export default defineComponent({
   setup() {
-    console.log(getGlobalState())
+    // console.log(getGlobalState())
     const setState = () => {
       microState.setGlobalState({ user: 'change!!!' })
       console.log(getGlobalState())
