@@ -38,6 +38,7 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { updateGlobalState } from '../../utils/microState'
+import { login } from '../../apis/user'
 
 export default defineComponent({
   setup() {
@@ -69,9 +70,10 @@ const useLogin = () => {
   const loginFormRef = ref<any>(null)
 
   const handleLogin = () => {
-    loginFormRef.value.validate((valid: boolean) => {
+    loginFormRef.value.validate(async (valid: boolean) => {
       if (valid) {
-        const token = 'this_is_a_fake_token'
+        const res = await login(loginForm)
+        const token = res.data.data.token
         updateGlobalState('token', token) // save token to the globalState
         router.replace('/') // redirect
       }

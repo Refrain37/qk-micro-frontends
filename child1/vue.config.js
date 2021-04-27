@@ -15,24 +15,33 @@ module.exports = {
         port: 8081,
         overlay: {
             warnings: false,
-            errors: true
+            errors: true,
         },
         headers: {
-            "Access-Control-Allow-Origin": "*"
+            'Access-Control-Allow-Origin': '*',
+        },
+        proxy: {
+            '/api': {
+                target: 'http://127.0.0.1:3000/api',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': '',
+                },
+            },
         },
     },
     // 自定义webpack配置
     configureWebpack: {
         resolve: {
             alias: {
-                '@': resolve('src')
-            }
+                '@': resolve('src'),
+            },
         },
         output: {
             // 把子应用打包成 umd 库格式
             library: 'child1',
             libraryTarget: 'umd',
-            jsonpFunction: `webpackJsonp_child1`
-        }
-    }
+            jsonpFunction: `webpackJsonp_child1`,
+        },
+    },
 }
