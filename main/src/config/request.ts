@@ -1,8 +1,10 @@
-const host: string = 'http://localhost'
-const port: number = 3000
-const path: string = '/api'
+const openMock = false
 
-export default {
-  baseURL: process.env.VUE_APP_BASE_API || `${host}:${port}${path}`,
-  timeout: 3000
+const baseUrl = 'http://localhost:3000/api'
+const mockUrl = ''
+
+module.exports = {
+  openMock,
+  baseUrl,
+  mockUrl
 }

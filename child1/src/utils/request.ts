@@ -1,8 +1,13 @@
 import axios from 'axios'
-import requestConfig from '../config/request'
-import store from '@/store'
+import store from '../store/index'
+const { baseUrl } = require('../config/request')
 
-const service = axios.create(requestConfig)
+const config = {
+  baseURL: process.env.VUE_APP_BASE_API || baseUrl,
+  timeout: 3000,
+}
+
+const service = axios.create(config)
 
 service.interceptors.request.use(
   config => {

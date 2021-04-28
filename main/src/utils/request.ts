@@ -1,8 +1,13 @@
 import axios from 'axios'
 import { getGlobalState } from './microState'
-import requestConfig from '../config/request'
+const { baseUrl } = require('../config/request')
 
-const service = axios.create(requestConfig)
+const config = {
+  baseURL: process.env.VUE_APP_BASE_API || baseUrl,
+  timeout: 3000
+}
+
+const service = axios.create(config)
 
 function getToken() {
   return getGlobalState('token')

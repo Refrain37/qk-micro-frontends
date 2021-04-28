@@ -1,4 +1,5 @@
 const path = require('path')
+const { openMock, baseUrl, mockUrl } = require('./src/config/request.ts')
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -22,7 +23,7 @@ module.exports = {
         },
         proxy: {
             '/api': {
-                target: 'http://127.0.0.1:3000/api',
+                target: openMock ? mockUrl : baseUrl,
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': '',
