@@ -1,9 +1,10 @@
 import router from './router'
-import { getGlobalState } from './utils/microState'
+import { getToken } from './utils/auth'
 
 router.beforeEach((to, form, next) => {
-  const token = getGlobalState('token')
-  if (token !== '') {
+  const token = getToken()
+  console.log(token)
+  if (token !== '' && token !== undefined) {
     if (to.path === '/login') {
       next('/')
     } else {

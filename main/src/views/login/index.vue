@@ -37,7 +37,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { updateGlobalState } from '../../utils/microState'
+import { setToken } from '../../utils/auth'
 import { login } from '../../apis/user'
 
 export default defineComponent({
@@ -74,7 +74,8 @@ const useLogin = () => {
       if (valid) {
         const res = await login(loginForm)
         const token = res.data.data.token
-        updateGlobalState('token', token) // save token to the globalState
+        setToken(token) // save token to the globalState
+
         router.replace('/') // redirect
       }
     })
