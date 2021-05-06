@@ -1,4 +1,4 @@
-const openMock = false
+const openMock = true
 
 const baseUrl = 'http://localhost:3000/api'
 const mockUrl = 'http://rap2api.taobao.org/app/mock/282552/api'
