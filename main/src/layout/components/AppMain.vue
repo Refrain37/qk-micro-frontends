@@ -1,7 +1,9 @@
 <template>
   <section class="app-main-container">
     <router-view />
+    <!-- micro start -->
     <div id="subapp-container"></div>
+    <!-- micro end -->
   </section>
 </template>
 

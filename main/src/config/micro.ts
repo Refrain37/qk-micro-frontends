@@ -1,6 +1,14 @@
-export const microState = {
+/* initial state value */
+export interface IMicroState {
+  user: string
+  token: string | null
+  userInfo: string | null
+}
+
+export const microState: IMicroState = {
   user: 'qiankun',
-  token: ''
+  token: null,
+  userInfo: null
 }
 
 /* micro-app routes */

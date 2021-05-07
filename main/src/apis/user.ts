@@ -7,3 +7,10 @@ export function login(params: any) {
     params
   })
 }
+
+export function getInfo() {
+  return request({
+    url: '/user/info',
+    method: 'get'
+  })
+}

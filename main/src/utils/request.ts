@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { getGlobalState } from './microState'
 const { baseUrl } = require('../config/request')
+import { getToken } from './auth'
 
 const config = {
   baseURL: process.env.VUE_APP_BASE_API || baseUrl,
@@ -8,9 +8,17 @@ const config = {
 }
 
 const service = axios.create(config)
-
-function getToken() {
-  return getGlobalState('token')
-}
+service.interceptors.request.use(
+  config => {
+    const token = getToken()
+    if (token) {
+      config.headers['authorization'] = 'Bearer ' + token
+    }
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
 
 export default service

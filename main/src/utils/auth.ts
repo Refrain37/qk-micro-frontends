@@ -4,15 +4,15 @@ import { getGlobalState, updateGlobalState } from './microState'
 const KEY: string = 'token'
 
 export function getToken() {
-  return getGlobalState('token') || Cookies.get(KEY)
+  return getGlobalState(KEY) || Cookies.get(KEY)
 }
 
 export function setToken(token: string) {
-  updateGlobalState('token', token)
+  updateGlobalState(KEY, token)
   return Cookies.set(KEY, token)
 }
 
 export function deleteToken() {
-  updateGlobalState('token', '')
+  updateGlobalState(KEY, null)
   return Cookies.remove(KEY)
 }
