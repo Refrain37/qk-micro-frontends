@@ -15,6 +15,8 @@ export const microState: IMicroState = {
 export interface IRoute {
   name: string
   path: string
+  icon?: string
+  children?: IRoute
 }
 
 const child1Routes: IRoute[] = [

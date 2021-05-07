@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 import { microState } from '../config/micro'
 
 // state只能进行新增或修改。无法删除
-let initialState: any = reactive(microState)
+export const initialState: any = reactive(microState)
 
 const actions = initGlobalState(initialState)
 
@@ -20,16 +20,19 @@ actions.onGlobalStateChange((newState, oldState) => {
 
 export default actions
 
-// extend
+/* extend method*/
+// get
 export const getGlobalState = (key?: string) =>
   key ? initialState[key] : initialState
 
+// add
 export const addGlobalState = (addObj: any) => {
   const oldState = getGlobalState()
   const newState = Object.assign(oldState, addObj)
   actions.setGlobalState(newState)
 }
 
+// update
 export const updateGlobalState = (updateKey: string, updateValue: any) => {
   let hadKey: boolean = false
   const oldState = getGlobalState()

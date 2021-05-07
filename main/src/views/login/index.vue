@@ -37,8 +37,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { setToken } from '../../utils/auth'
-import { login } from '../../apis/user'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   setup() {
@@ -56,6 +55,7 @@ export default defineComponent({
 
 const useLogin = () => {
   const router = useRouter()
+  const store = useStore()
 
   interface ILoginForm {
     username: string
@@ -72,11 +72,12 @@ const useLogin = () => {
   const handleLogin = () => {
     loginFormRef.value.validate(async (valid: boolean) => {
       if (valid) {
-        const res = await login(loginForm)
-        const token = res.data.data.token
-        setToken(token) // save token to the globalState
-
-        router.replace('/') // redirect
+        try {
+          await store.dispatch('user/login', loginForm)
+          router.replace('/') // redirect
+        } catch (error) {}
+      } else {
+        return false
       }
     })
   }

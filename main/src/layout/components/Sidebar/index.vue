@@ -22,6 +22,7 @@ export default defineComponent({
   },
   setup() {
     const routes: IRoute[] = reactive(getRoutes())
+
     return {
       routes
     }

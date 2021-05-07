@@ -3,14 +3,14 @@ import Home from '../views/home/index.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
     path: '/login',
     name: 'login',
     component: () => import('../views/login/index.vue')
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
   }
 ]
 
