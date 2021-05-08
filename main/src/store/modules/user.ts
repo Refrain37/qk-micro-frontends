@@ -19,6 +19,7 @@ const state: IUserState = {
   github: '',
   introduction: ''
 }
+
 const mutations = {
   SET_TOKEN(state: IUserState, token: string) {
     state.token = token
@@ -39,6 +40,7 @@ const mutations = {
     state.introduction = introduction
   }
 }
+
 const actions = {
   async login(
     { commit }: any,
@@ -47,15 +49,28 @@ const actions = {
     try {
       const res = await login(formData)
       const token = res.data.data.token
-      updateGlobalState('token', token)
-      setToken(token)
+      updateGlobalState('token', token) // update globalState
+      setToken(token) // set token
       commit('SET_TOKEN', token)
       return
     } catch (error) {
       throw Error('login fail')
     }
   },
-  async getInfo({ commit, state }: any) {},
+  async getInfo({ commit, state }: any) {
+    const res = await getInfo()
+    const data = res.data.data
+    updateGlobalState('userInfo', JSON.stringify(data)) // update globalState
+
+    const { username, avatar, email, github, introduction } = data
+    commit('SET_USERNAME', username)
+    commit('SET_AVATAR', avatar)
+    commit('SET_EMAIL', email)
+    commit('SET_GITHUB', github)
+    commit('SET_INTRODUCTION', introduction)
+
+    return data
+  },
   async logout() {}
 }
 

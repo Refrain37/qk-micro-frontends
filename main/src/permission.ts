@@ -1,4 +1,5 @@
 import router from './router'
+import store from './store'
 import { getToken } from './utils/auth'
 
 router.beforeEach(async (to, form, next) => {
@@ -8,7 +9,18 @@ router.beforeEach(async (to, form, next) => {
       next('/')
     } else {
       /* check userInfo */
-      next()
+      const hasSetUserInfo = store.getters.username
+      if (hasSetUserInfo) {
+        next()
+      } else {
+        try {
+          // request
+          await store.dispatch('user/getInfo')
+          next()
+        } catch (error) {
+          // TODO:remove token
+        }
+      }
     }
   } else {
     /* no token */
