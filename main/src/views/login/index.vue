@@ -73,7 +73,7 @@ const useLogin = () => {
     loginFormRef.value.validate(async (valid: boolean) => {
       if (valid) {
         try {
-          await store.dispatch('user/login', loginForm)
+          await store.dispatch('user/login', loginForm) // request
           router.replace('/') // redirect
         } catch (error) {}
       } else {
@@ -88,6 +88,7 @@ const useLogin = () => {
     handleLogin
   }
 }
+// validataRules
 const useloginRules = () => {
   const validateUsername = (rule: any, value: any, callback: any) => {
     if (value.length < 5) {
@@ -117,18 +118,23 @@ const useloginRules = () => {
 </script>
 
 <style scoped lang="scss">
+@import '../../styles/variables.scss';
+
 .login-container {
   height: 100vh;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #2d3a4b;
+  background: $bgColor;
   .login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 25%;
+    padding: 50px;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+    border-radius: 20px;
     h1 {
       color: white;
       margin-bottom: 40px;

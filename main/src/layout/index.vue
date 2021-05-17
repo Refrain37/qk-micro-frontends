@@ -1,6 +1,6 @@
 <template>
   <div class="app-wrapper">
-    <sidebar></sidebar>
+    <sidebar class="sidebar"></sidebar>
     <div class="main-container">
       <navbar />
       <app-main />
@@ -25,6 +25,8 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+$width: 260px;
+
 .app-wrapper {
   display: flex;
   flex-direction: row;
@@ -32,13 +34,16 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   min-height: 100vh;
+  .sidebar {
+    width: $width;
+  }
   .main-container {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-left: 210px;
+    margin-left: $width;
     min-height: 100%;
-    width: calc(100% - 210px);
+    width: calc(100% - #{$width});
     overflow: hidden;
   }
 }

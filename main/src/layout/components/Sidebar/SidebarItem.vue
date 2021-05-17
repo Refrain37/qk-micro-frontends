@@ -46,16 +46,16 @@ export default defineComponent({
   cursor: pointer;
 }
 .sidebar-item:hover {
-  background-color: #263445;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 .router-link {
   height: 55px !important;
   display: inline-block;
   font-size: 14px;
   line-height: 55px;
-  color: rgb(191, 203, 217);
+  color: #fff;
 }
 .router-link-active {
-  color: rgb(64, 158, 255);
+  color: #fff;
 }
 </style>

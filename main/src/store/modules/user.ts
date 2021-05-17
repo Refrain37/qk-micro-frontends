@@ -1,4 +1,4 @@
-import { getInfo, login } from '@/apis/user'
+import { getInfo, login, logout } from '@/apis/user'
 import { getGlobalState, updateGlobalState } from '../../utils/microState'
 import { getToken, deleteToken, setToken } from '../../utils/auth'
 
@@ -51,27 +51,52 @@ const actions = {
       const token = res.data.data.token
       updateGlobalState('token', token) // update globalState
       setToken(token) // set token
-      commit('SET_TOKEN', token)
+      commit('SET_TOKEN', token) // commit
       return
     } catch (error) {
       throw Error('login fail')
     }
   },
   async getInfo({ commit, state }: any) {
-    const res = await getInfo()
-    const data = res.data.data
-    updateGlobalState('userInfo', JSON.stringify(data)) // update globalState
+    try {
+      const res = await getInfo()
+      const data = res.data.data
+      updateGlobalState('userInfo', JSON.stringify(data)) // update globalState
 
-    const { username, avatar, email, github, introduction } = data
-    commit('SET_USERNAME', username)
-    commit('SET_AVATAR', avatar)
-    commit('SET_EMAIL', email)
-    commit('SET_GITHUB', github)
-    commit('SET_INTRODUCTION', introduction)
+      // commit
+      const { username, avatar, email, github, introduction } = data
+      commit('SET_USERNAME', username)
+      commit('SET_AVATAR', avatar)
+      commit('SET_EMAIL', email)
+      commit('SET_GITHUB', github)
+      commit('SET_INTRODUCTION', introduction)
 
-    return data
+      return data
+    } catch (error) {
+      throw Error('err')
+    }
   },
-  async logout() {}
+  async logout({ commit }: any) {
+    try {
+      const res = await logout()
+      deleteToken()
+      // update globalState
+      updateGlobalState('token', null)
+      updateGlobalState('userInfo', null)
+
+      // commit
+      commit('SET_TOKEN', '')
+      commit('SET_USERNAME', '')
+      commit('SET_AVATAR', '')
+      commit('SET_EMAIL', '')
+      commit('SET_GITHUB', '')
+      commit('SET_INTRODUCTION', '')
+
+      return res.data.data
+    } catch (error) {
+      throw Error('err')
+    }
+  }
 }
 
 export default {
