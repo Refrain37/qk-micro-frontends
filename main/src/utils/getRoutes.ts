@@ -7,7 +7,9 @@ export function getRoutes(): IRoute[] {
     .map(item => {
       return {
         name: item.name,
-        path: item.path
+        path: item.path,
+        meta: item.meta,
+        children: item.children
       }
     })
     .filter(item => !blackList.includes(item.name as string)) as IRoute[]

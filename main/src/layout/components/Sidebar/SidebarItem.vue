@@ -1,15 +1,31 @@
 <template>
   <div class="sidebar-item">
-    <div class="link">
-      <router-link
-        class="router-link"
-        :class="{ 'router-link-active': match }"
-        :to="path"
-        :name="name"
-      >
-        {{ name }}
-      </router-link>
+    <!-- menu-item start -->
+    <el-menu-item :index="item.meta.index">
+      <div class="link">
+        <router-link
+          class="router-link"
+          :class="{ 'router-link-active': match }"
+          :to="item.path"
+          :name="item.name"
+        >
+          {{ item.name }}
+        </router-link>
+      </div>
+    </el-menu-item>
+    <!-- menu-item end -->
+
+    <!-- submenu start -->
+    <div v-if="hasChildren">
+      <el-submenu>
+        <sidebar-item
+          v-for="(child, index) in item.children"
+          :item="child"
+          :key="index"
+        ></sidebar-item>
+      </el-submenu>
     </div>
+    <!-- submenu end -->
   </div>
 </template>
 
@@ -19,22 +35,34 @@ import { useRoute } from 'vue-router'
 
 export default defineComponent({
   props: {
-    name: String,
-    path: String
+    item: Object
   },
   setup(props) {
-    const { path } = props
+    const hasChildren = computed(() => {
+      const children = props.item?.children
+      return children && children.length > 0
+    })
+
+    const path = props.item?.path
     const match = computed(() => {
       return path === useRoute().path
     })
     return {
+      hasChildren,
       match
     }
   }
 })
 </script>
 
-<style scoped>
+<style>
+.el-menu {
+  background: transparent !important;
+}
+.el-menu-item:focus,
+.el-menu-item:hover {
+  background-color: transparent !important;
+}
 .sidebar-item {
   display: flex;
   flex-direction: row;

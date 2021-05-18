@@ -10,7 +10,10 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      index: '1'
+    }
   }
 ]
 

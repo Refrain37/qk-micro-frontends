@@ -4,7 +4,6 @@
     <div class="user-info">
       <img class="avatar" :src="avatar" />
       <p class="name">{{ username }}</p>
-
       <!-- dropdown start -->
       <el-dropdown>
         <span class="dropdown">
@@ -25,13 +24,21 @@
     <!-- userInfo end -->
 
     <!-- menu start -->
-    <sidebar-item
-      v-for="(item, index) in routes"
-      :key="index"
-      :name="item.name"
-      :path="item.path"
-    >
-    </sidebar-item>
+    <div class="menu">
+      <el-menu
+        :style="{ backgroundColor: 'transparent', borderRight: 'none' }"
+        mode="vertical"
+        :collapse="isCollapse"
+        :unique-opened="false"
+        :collapse-transition="false"
+        :text-color="'#fffffff'"
+        :active-text-color="'#fffffff'"
+      >
+        <sidebar-item v-for="(item, index) in routes" :key="index" :item="item">
+        </sidebar-item>
+      </el-menu>
+    </div>
+
     <!-- menu end -->
   </div>
 </template>
@@ -49,10 +56,9 @@ export default defineComponent({
     SidebarItem
   },
   setup() {
-    const routes: IRoute[] = reactive(getRoutes())
+    const routes: IRoute[] = reactive(getRoutes()) // getRoutes
     const { username, avatar } = useGetInfo()
     const handleLogout = useHandleLogout()
-
     return {
       routes,
       username,
@@ -124,5 +130,11 @@ function useHandleLogout() {
     }
   }
   /* user-info card end */
+  /* menu start */
+  .menu {
+    width: 100%;
+    margin-top: 20px;
+  }
+  /* menu end */
 }
 </style>
