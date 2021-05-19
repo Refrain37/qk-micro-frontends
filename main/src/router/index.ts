@@ -12,7 +12,8 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: Home,
     meta: {
-      index: '1'
+      index: '1',
+      icon: 'el-icon-tickets'
     }
   }
 ]

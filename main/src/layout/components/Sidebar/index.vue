@@ -28,7 +28,7 @@
       <el-menu
         :style="{ backgroundColor: 'transparent', borderRight: 'none' }"
         mode="vertical"
-        :collapse="isCollapse"
+        :collapse="false"
         :unique-opened="false"
         :collapse-transition="false"
         :text-color="'#fffffff'"

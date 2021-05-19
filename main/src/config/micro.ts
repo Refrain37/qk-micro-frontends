@@ -28,16 +28,26 @@ export interface IRoute {
 const child1Routes: IRoute[] = [
   {
     name: 'child1-home',
-    path: '/child1/',
     meta: {
-      index: '2'
+      index: '2',
+      title: 'child1-home',
+      icon: 'el-icon-tickets'
     },
     children: [
       {
-        name: 'child1-zzz',
-        path: '/child1/zzz',
+        name: 'child1',
+        path: '/child1/',
         meta: {
-          index: '2-1'
+          index: '2-1',
+          icon: 'el-icon-tickets'
+        }
+      },
+      {
+        name: 'child1-bbb',
+        path: '/child1/bbb',
+        meta: {
+          index: '2-2',
+          icon: 'el-icon-tickets'
         }
       }
     ]
@@ -46,7 +56,8 @@ const child1Routes: IRoute[] = [
     name: 'child1-test',
     path: '/child1/test',
     meta: {
-      index: '3'
+      index: '3',
+      icon: 'el-icon-tickets'
     }
   }
 ]
@@ -56,14 +67,16 @@ const child2Routes: IRoute[] = [
     name: 'child2-home',
     path: '/child2/',
     meta: {
-      index: '4'
+      index: '4',
+      icon: 'el-icon-tickets'
     }
   },
   {
     name: 'child2-show',
     path: '/child2/show',
     meta: {
-      index: '5'
+      index: '5',
+      icon: 'el-icon-tickets'
     }
   }
 ]
