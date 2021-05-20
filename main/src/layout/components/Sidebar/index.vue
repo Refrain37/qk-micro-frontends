@@ -46,7 +46,7 @@
 <script lang="ts">
 import { computed, defineComponent, reactive } from 'vue'
 import SidebarItem from '../Sidebar/SidebarItem.vue'
-import { IRoute } from '../../../config/micro'
+import { IRoute } from '../../../micro/routes'
 import { getRoutes } from '../../../utils/getRoutes'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'

@@ -1,10 +1,22 @@
 import { initGlobalState } from 'qiankun'
 import { reactive } from 'vue'
-import { microState } from '../config/micro'
 
-// state只能进行新增或修改。无法删除
-export const initialState: any = reactive(microState)
+/* state */
+export interface IMicroState {
+  user: string
+  token: string | null
+  userInfo: string | null
+}
 
+export const microState: IMicroState = {
+  user: 'qiankun',
+  token: null,
+  userInfo: null
+}
+
+export const initialState: any = reactive(microState) // state只能进行新增或修改,无法删除
+
+/* actions */
 const actions = initGlobalState(initialState)
 
 actions.onGlobalStateChange((newState, oldState) => {

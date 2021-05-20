@@ -8,7 +8,7 @@ import './permission'
 import ElementPlus from './utils/element'
 
 import './styles/index.scss'
-import { microInit } from './micro'
+import { microInit } from './micro/index'
 
 createApp(App)
   .use(store)

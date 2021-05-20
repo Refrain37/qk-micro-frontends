@@ -1,5 +1,5 @@
 import { ObjectType, registerMicroApps, RegistrableApp, start } from 'qiankun'
-import { getGlobalState } from './utils/microState'
+import { getGlobalState } from './state'
 
 const routerConfig: RegistrableApp<ObjectType>[] = [
   {

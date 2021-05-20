@@ -1,27 +1,14 @@
-/* initial state value */
-export interface IMicroState {
-  user: string
-  token: string | null
-  userInfo: string | null
-}
-
-export const microState: IMicroState = {
-  user: 'qiankun',
-  token: null,
-  userInfo: null
-}
-
-/* micro-app routes */
 interface IMeta {
   index: string
   icon?: string
   name?: string
+  title?: string
 }
 
 export interface IRoute {
   name: string
   path?: string
-  meta: Object
+  meta?: IMeta
   children?: IRoute[]
 }
 

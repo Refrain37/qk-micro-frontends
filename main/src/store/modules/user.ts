@@ -1,5 +1,5 @@
 import { getInfo, login, logout } from '@/apis/user'
-import { getGlobalState, updateGlobalState } from '../../utils/microState'
+import { getGlobalState, updateGlobalState } from '../../micro/state'
 import { getToken, deleteToken, setToken } from '../../utils/auth'
 
 interface IUserState {

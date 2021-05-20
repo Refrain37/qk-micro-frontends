@@ -13,7 +13,7 @@ import microState, {
   getGlobalState,
   addGlobalState,
   updateGlobalState
-} from '../../utils/microState'
+} from '../../micro/state'
 
 export default defineComponent({
   setup() {

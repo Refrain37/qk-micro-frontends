@@ -1,4 +1,4 @@
-import { IRoute, microRoutes } from '../config/micro'
+import { IRoute, microRoutes } from '../micro/routes'
 import { routes as mainRoutes } from '../router'
 import blackList from '../config/routeBlackList'
 
