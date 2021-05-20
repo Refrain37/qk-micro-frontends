@@ -1,0 +1,54 @@
+<template>
+  <div class="link">
+    <i :class="[icon, { active: match }]"></i>
+    <router-link
+      class="router-link"
+      :class="{ 'router-link-active': match }"
+      :to="path"
+      :name="name"
+    >
+      {{ name }}
+    </router-link>
+  </div>
+</template>
+
+<script lang="ts">
+import { computed, ComputedRef, defineComponent } from 'vue'
+import { useRoute } from 'vue-router'
+
+export default defineComponent({
+  props: {
+    name: String,
+    icon: String,
+    path: String
+  },
+  setup(props) {
+    const path = props.path
+    const match: ComputedRef<boolean> = computed(() => {
+      return path === useRoute().path
+    })
+    return {
+      match
+    }
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+@import '../../../styles/variables.scss';
+
+.router-link {
+  height: 55px !important;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 55px;
+  color: $textColor;
+}
+.router-link-active {
+  color: $activeTextColor;
+  text-shadow: 1px 1px 10px #c9c9c9;
+}
+.active {
+  color: $activeTextColor !important;
+}
+</style>

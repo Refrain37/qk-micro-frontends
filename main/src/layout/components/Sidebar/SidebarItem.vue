@@ -2,17 +2,7 @@
   <div class="sidebar-item">
     <!-- menu-item start -->
     <el-menu-item :index="index" v-if="!hasChildren">
-      <div class="link">
-        <i :class="[icon, { active: match }]"></i>
-        <router-link
-          class="router-link"
-          :class="{ 'router-link-active': match }"
-          :to="item.path"
-          :name="item.name"
-        >
-          {{ item.name }}
-        </router-link>
-      </div>
+      <Link :icon="icon" :name="name" :path="path"></Link>
     </el-menu-item>
     <!-- menu-item end -->
 
@@ -36,11 +26,14 @@
 
 <script lang="ts">
 import { computed, ComputedRef, defineComponent, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import Link from './Link.vue'
 
 export default defineComponent({
   props: {
     item: Object
+  },
+  components: {
+    Link
   },
   setup(props) {
     const hasChildren: ComputedRef<boolean> = computed(() => {
@@ -48,18 +41,16 @@ export default defineComponent({
       return children && children.length > 0
     })
 
-    const path = props.item?.path
-    const match: ComputedRef<boolean> = computed(() => {
-      return path === useRoute().path
-    })
-
+    const path = ref<string>(props.item?.path)
+    const name = ref<string>(props.item?.name)
     const index = ref<string>(props.item?.meta.index)
     const icon = ref<string>(props.item?.meta.icon)
     const title = ref<string>(props.item?.meta.title)
 
     return {
       hasChildren,
-      match,
+      path,
+      name,
       index,
       icon,
       title
@@ -90,8 +81,8 @@ export default defineComponent({
 .el-menu-item i {
   color: white !important;
 }
-
 /* el-ui end */
+
 .sidebar-item {
   display: flex;
   flex-direction: row;
@@ -103,22 +94,6 @@ export default defineComponent({
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
-  /* link start */
-  .router-link {
-    height: 55px !important;
-    display: inline-block;
-    font-size: 14px;
-    line-height: 55px;
-    color: $textColor;
-  }
-  .router-link-active {
-    color: $activeTextColor;
-    text-shadow: 1px 1px 10px #c9c9c9;
-  }
-  .active {
-    color: $activeTextColor !important;
-  }
-  /* link end */
   .title {
     color: $textColor;
   }
