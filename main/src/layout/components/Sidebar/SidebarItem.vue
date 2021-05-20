@@ -1,9 +1,9 @@
 <template>
   <div class="sidebar-item">
     <!-- menu-item start -->
-    <el-menu-item :index="item.meta.index" v-if="!hasChildren">
+    <el-menu-item :index="index" v-if="!hasChildren">
       <div class="link">
-        <i :class="item.meta.icon"></i>
+        <i :class="[icon, { active: match }]"></i>
         <router-link
           class="router-link"
           :class="{ 'router-link-active': match }"
@@ -17,11 +17,11 @@
     <!-- menu-item end -->
 
     <!-- submenu start -->
-    <el-submenu v-else :index="item.meta.index">
+    <el-submenu v-else :index="index">
       <template #title>
         <span class="title">
-          <i :class="item.meta.icon"></i>
-          <span>{{ item.meta.title }}</span>
+          <i :class="icon"></i>
+          <span>{{ title }}</span>
         </span>
       </template>
       <sidebar-item
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, ComputedRef, defineComponent, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 export default defineComponent({
@@ -43,18 +43,26 @@ export default defineComponent({
     item: Object
   },
   setup(props) {
-    const hasChildren = computed(() => {
+    const hasChildren: ComputedRef<boolean> = computed(() => {
       const children = props.item?.children
       return children && children.length > 0
     })
 
     const path = props.item?.path
-    const match = computed(() => {
+    const match: ComputedRef<boolean> = computed(() => {
       return path === useRoute().path
     })
+
+    const index = ref<string>(props.item?.meta.index)
+    const icon = ref<string>(props.item?.meta.icon)
+    const title = ref<string>(props.item?.meta.title)
+
     return {
       hasChildren,
-      match
+      match,
+      index,
+      icon,
+      title
     }
   }
 })
@@ -82,9 +90,7 @@ export default defineComponent({
 .el-menu-item i {
   color: white !important;
 }
-.el-menu-item.is-active i {
-  color: $activeTextColor !important;
-}
+
 /* el-ui end */
 .sidebar-item {
   display: flex;
@@ -108,6 +114,9 @@ export default defineComponent({
   .router-link-active {
     color: $activeTextColor;
     text-shadow: 1px 1px 10px #c9c9c9;
+  }
+  .active {
+    color: $activeTextColor !important;
   }
   /* link end */
   .title {
