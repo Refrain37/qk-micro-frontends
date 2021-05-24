@@ -3,7 +3,7 @@
     <!-- userInfo start -->
     <div class="user-info">
       <img class="avatar" :src="avatar" />
-      <p class="name">{{ username }}</p>
+      <p class="name transition" v-if="!isCollapse">{{ username }}</p>
       <!-- dropdown start -->
       <el-dropdown>
         <span class="dropdown">
@@ -28,13 +28,18 @@
       <el-menu
         :style="{ backgroundColor: 'transparent', borderRight: 'none' }"
         mode="vertical"
-        :collapse="false"
+        :collapse="isCollapse"
         :unique-opened="false"
         :collapse-transition="false"
         :text-color="'#fffffff'"
         :active-text-color="'#fffffff'"
       >
-        <sidebar-item v-for="(item, index) in routes" :key="index" :item="item">
+        <sidebar-item
+          v-for="(item, index) in routes"
+          :key="index"
+          :item="item"
+          :isCollapse="isCollapse"
+        >
         </sidebar-item>
       </el-menu>
     </div>
@@ -57,10 +62,14 @@ export default defineComponent({
   },
   setup() {
     const routes: IRoute[] = reactive(getRoutes()) // getRoutes
+    const store = useStore()
+    const isCollapse = computed(() => !store.getters.isOpened)
+
     const { username, avatar } = useGetInfo()
     const handleLogout = useHandleLogout()
     return {
       routes,
+      isCollapse,
       username,
       avatar,
       handleLogout

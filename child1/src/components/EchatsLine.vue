@@ -193,7 +193,9 @@
 
   function useEchartsLine() {
     onMounted(() => {
-      const myChart = echarts.init(document.getElementById('echarts-line'))
+      const myChart = echarts.init(
+        document.getElementById('echarts-line') as HTMLElement
+      )
       myChart && myChart.setOption(option)
     })
   }

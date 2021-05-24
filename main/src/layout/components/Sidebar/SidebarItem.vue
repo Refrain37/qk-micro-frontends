@@ -2,7 +2,12 @@
   <div class="sidebar-item">
     <!-- menu-item start -->
     <el-menu-item :index="index" v-if="!hasChildren">
-      <Link :icon="icon" :name="name" :path="path"></Link>
+      <Link
+        :icon="icon"
+        :name="name"
+        :path="path"
+        :isCollapse="isCollapse"
+      ></Link>
     </el-menu-item>
     <!-- menu-item end -->
 
@@ -11,7 +16,7 @@
       <template #title>
         <span class="title">
           <i :class="icon"></i>
-          <span>{{ title }}</span>
+          <span v-if="!isCollapse">{{ title }}</span>
         </span>
       </template>
       <sidebar-item
@@ -30,7 +35,8 @@ import Link from './Link.vue'
 
 export default defineComponent({
   props: {
-    item: Object
+    item: Object,
+    isCollapse: Boolean
   },
   components: {
     Link
@@ -80,6 +86,9 @@ export default defineComponent({
 }
 .el-menu-item i {
   color: white !important;
+}
+.el-menu--collapse {
+  width: 80px !important;
 }
 /* el-ui end */
 

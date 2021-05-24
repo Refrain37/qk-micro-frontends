@@ -1,13 +1,13 @@
 <template>
   <div class="link">
-    <i :class="[icon, { active: match }]"></i>
     <router-link
       class="router-link"
       :class="{ 'router-link-active': match }"
       :to="path"
       :name="name"
     >
-      {{ name }}
+      <i :class="[icon, { active: match }]"></i>
+      <span v-if="!isCollapse">{{ name }}</span>
     </router-link>
   </div>
 </template>
@@ -15,18 +15,21 @@
 <script lang="ts">
 import { computed, ComputedRef, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   props: {
     name: String,
     icon: String,
-    path: String
+    path: String,
+    isCollapse: Boolean
   },
   setup(props) {
     const path = props.path
     const match: ComputedRef<boolean> = computed(() => {
       return path === useRoute().path
     })
+
     return {
       match
     }

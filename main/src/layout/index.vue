@@ -1,15 +1,16 @@
 <template>
   <div class="app-wrapper">
-    <sidebar class="sidebar"></sidebar>
-    <div class="main-container">
-      <navbar />
-      <app-main />
+    <sidebar class="sidebar transition"></sidebar>
+    <div class="main-container transition">
+      <navbar class="navbar-container" />
+      <app-main class="appMain-container" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
+import { useStore } from 'vuex'
 import { Navbar, AppMain, Sidebar } from './components'
 
 export default defineComponent({
@@ -19,13 +20,17 @@ export default defineComponent({
     Sidebar
   },
   setup() {
-    return {}
+    const store = useStore()
+    const width = computed(() =>
+      store.getters.isOpened === true ? '260px' : '80px'
+    )
+    return { width }
   }
 })
 </script>
 
 <style scoped lang="scss">
-$width: 260px;
+$width: v-bind(width);
 
 .app-wrapper {
   display: flex;
@@ -45,6 +50,12 @@ $width: 260px;
     min-height: 100%;
     width: calc(100% - #{$width});
     overflow: hidden;
+    .navbar-container {
+      height: 60px;
+    }
+    .appMain-container {
+      min-height: calc(100vh - 60px);
+    }
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <section class="app-main-container">
+  <section class="appMain-container">
     <router-view />
     <!-- micro start -->
     <div id="subapp-container"></div>
@@ -18,10 +18,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.app-main-container {
-  min-height: calc(100vh - 50px);
+@import '../../styles/variables';
+.appMain-container {
   width: 100%;
   position: relative;
   overflow: hidden;
+  background-color: $appMainBgColor;
 }
 </style>
