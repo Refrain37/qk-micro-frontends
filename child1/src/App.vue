@@ -1,11 +1,14 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/test">test</router-link>
-  </div>
-  <router-view/>
+  <router-view />
 </template>
 
-<style lang="scss">
+<script lang="ts">
+  import { defineComponent, provide } from 'vue'
+  import * as echarts from 'echarts'
 
-</style>
+  export default defineComponent({
+    setup() {
+      provide('echarts', echarts) // 将echarts注入到全局
+    },
+  })
+</script>

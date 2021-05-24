@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import { isSingle } from './micro'
 export { bootstrap, mount, unmount } from './micro'
+import './styles/index.scss'
 
 export function render(props: any = {}) {
   const { container } = props
