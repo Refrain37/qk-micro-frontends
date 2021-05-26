@@ -7,7 +7,7 @@
       :name="name"
     >
       <i :class="[icon, { active: match }]"></i>
-      <span v-if="!isCollapse">{{ name }}</span>
+      <span v-if="!isCollapse" class="name">{{ name }}</span>
     </router-link>
   </div>
 </template>
@@ -49,9 +49,12 @@ export default defineComponent({
 }
 .router-link-active {
   color: $activeTextColor;
-  text-shadow: 1px 1px 10px #c9c9c9;
+  text-shadow: 1px 1px 10px #a09f9f;
 }
 .active {
   color: $activeTextColor !important;
+}
+.name {
+  font-weight: 700;
 }
 </style>

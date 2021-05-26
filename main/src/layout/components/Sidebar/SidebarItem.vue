@@ -85,10 +85,13 @@ export default defineComponent({
   background-color: transparent !important;
 }
 .el-menu-item i {
-  color: white !important;
+  color: $textColor !important;
 }
 .el-menu--collapse {
   width: 80px !important;
+}
+.el-menu--popup {
+  background-image: $bgColor !important;
 }
 /* el-ui end */
 
@@ -101,10 +104,13 @@ export default defineComponent({
   cursor: pointer;
   transition: all 0.3s;
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
   }
   .title {
     color: $textColor;
+    span {
+      font-weight: 700;
+    }
   }
 }
 </style>

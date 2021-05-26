@@ -18,7 +18,7 @@ const child1Routes: IRoute[] = [
     meta: {
       index: '2',
       title: 'child1-home',
-      icon: 'el-icon-tickets'
+      icon: 'el-icon-upload'
     },
     children: [
       {
@@ -26,7 +26,7 @@ const child1Routes: IRoute[] = [
         path: '/child1/',
         meta: {
           index: '2-1',
-          icon: 'el-icon-tickets'
+          icon: 'el-icon-picture-outline'
         }
       },
       {
@@ -34,7 +34,7 @@ const child1Routes: IRoute[] = [
         path: '/child1/bbb',
         meta: {
           index: '2-2',
-          icon: 'el-icon-tickets'
+          icon: 'el-icon-picture'
         }
       }
     ]
@@ -44,7 +44,7 @@ const child1Routes: IRoute[] = [
     path: '/child1/test',
     meta: {
       index: '3',
-      icon: 'el-icon-tickets'
+      icon: 'el-icon-s-management'
     }
   }
 ]
@@ -55,7 +55,7 @@ const child2Routes: IRoute[] = [
     path: '/child2/',
     meta: {
       index: '4',
-      icon: 'el-icon-tickets'
+      icon: 'el-icon-paperclip'
     }
   },
   {
@@ -63,7 +63,7 @@ const child2Routes: IRoute[] = [
     path: '/child2/show',
     meta: {
       index: '5',
-      icon: 'el-icon-tickets'
+      icon: 'el-icon-s-flag'
     }
   }
 ]
