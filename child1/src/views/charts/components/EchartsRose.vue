@@ -40,17 +40,9 @@
       const echarts: any = inject('echarts')
       onMounted(() => {
         const mychart = echarts.init(document.getElementById('echarts-rose'))
-
         mychart && mychart.setOption(option)
       })
       return {}
     },
   })
 </script>
-
-<style scoped>
-  .echarts-rose {
-    width: 450px;
-    height: 450px;
-  }
-</style>

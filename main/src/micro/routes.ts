@@ -40,6 +40,32 @@ const child1Routes: IRoute[] = [
     ]
   },
   {
+    name: 'child1-data',
+    meta: {
+      index: '3',
+      title: 'Data visualization',
+      icon: 'el-icon-s-marketing'
+    },
+    children: [
+      {
+        name: 'charts',
+        path: '/child1/data/charts',
+        meta: {
+          index: '3-1',
+          icon: 'el-icon-pie-chart'
+        }
+      },
+      {
+        name: 'map',
+        path: '/child1/data/map',
+        meta: {
+          index: '3-2',
+          icon: 'el-icon-guide'
+        }
+      }
+    ]
+  },
+  {
     name: 'child1-test',
     path: '/child1/test',
     meta: {
