@@ -24,7 +24,7 @@
     <!-- userInfo end -->
 
     <!-- menu start -->
-    <div class="menu">
+    <div :class="['menu', { collapsed: isCollapse }]">
       <el-menu
         :style="{ backgroundColor: 'transparent', borderRight: 'none' }"
         mode="vertical"
@@ -38,9 +38,7 @@
           v-for="(item, index) in routes"
           :key="index"
           :item="item"
-          :isCollapse="isCollapse"
-        >
-        </sidebar-item>
+        ></sidebar-item>
       </el-menu>
     </div>
 

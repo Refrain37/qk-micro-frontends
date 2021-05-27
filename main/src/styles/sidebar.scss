@@ -1,0 +1,126 @@
+@import './variables';
+.menu,
+.el-menu--popup {
+    /* reset element-ui start*/
+    .el-menu {
+        background: transparent !important;
+    }
+    .el-submenu {
+        width: 100%;
+    }
+    .el-submenu__title i {
+        color: $textColor !important;
+    }
+    .el-submenu__title:hover {
+        background-color: transparent !important;
+    }
+    .el-menu-item:focus,
+    .el-menu-item:hover {
+        background-color: transparent !important;
+    }
+    .el-menu-item i {
+        color: $textColor !important;
+    }
+    .el-menu--collapse {
+        width: 80px !important;
+    }
+    /* reset element-ui end */
+    .sidebar-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .title {
+            color: $textColor;
+            span {
+                font-weight: 700;
+            }
+        }
+        /* submenu-active start */
+        .is-active {
+            .title {
+                color: $activeTextColor;
+                &>i {
+                    color: $activeTextColor !important;
+                }
+            }
+            .el-submenu__title {
+                &>i {
+                    color: $activeTextColor !important;
+                }
+            }
+        }
+        /* submenu-active end */
+        /* link start */
+        .link {
+            .router-link {
+                height: 55px !important;
+                display: inline-block;
+                font-size: 14px;
+                line-height: 55px;
+                color: $textColor;
+                .name {
+                    font-weight: 700;
+                }
+            }
+            .router-link-active {
+                color: $activeTextColor;
+                text-shadow: 1px 1px 10px #a09f9f;
+                &>i {
+                    color: $activeTextColor !important;
+                }
+            }
+        }
+        /* link end */
+    }
+}
+
+
+/* collapse start */
+
+.collapsed {
+    .sidebar-item {
+        /* link start */
+        .link {
+            .name {
+                display: none;
+            }
+        }
+        /* link end */
+        /* submenu start */
+        .el-submenu__title {
+            .title {
+                &>span {
+                    display: none;
+                }
+            }
+            &>i {
+                display: none;
+            }
+        }
+        /* submenu end */
+    }
+}
+
+.el-menu--popup {
+    .sidebar-item {
+        .link {
+            .router-link-active {
+                text-shadow: none;
+                color: rgb(51, 51, 51);
+                &>i {
+                    color: rgb(51, 51, 51) !important;
+                }
+            }
+        }
+    }
+}
+
+
+/* collapse end */
