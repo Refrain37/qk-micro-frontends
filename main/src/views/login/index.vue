@@ -23,6 +23,7 @@
             v-model="loginForm.password"
             placeholder="Password"
             show-password
+            @keyup.enter="handleLogin"
           ></el-input>
         </el-form-item>
 
@@ -118,15 +119,26 @@ const useloginRules = () => {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/variables.scss';
-
 .login-container {
   height: 100vh;
   width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $bgColor;
+  background-image: linear-gradient(125deg, #00f260, #12c2e9, #c471ed, #f64f59);
+  background-size: 400%;
+  animation: bganimation 15s infinite;
+  @keyframes bganimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
   .login-form {
     display: flex;
     flex-direction: column;
