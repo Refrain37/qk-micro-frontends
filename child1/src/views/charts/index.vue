@@ -52,6 +52,7 @@
         }
 
         onElementResize(chartListRef.value, () => {
+          // 避免同时resize（重排重绘）
           instanceLsit.forEach((item, index) => {
             setTimeout(() => {
               item.resize(option)
