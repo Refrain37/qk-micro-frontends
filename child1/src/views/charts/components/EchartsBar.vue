@@ -1,5 +1,5 @@
 <template>
-  <div class="echarts-bar" id="echarts-bar"></div>
+  <div class="echarts-bar" id="echarts-bar" ref="bar"></div>
 </template>
 
 <script lang="ts">
@@ -95,8 +95,10 @@
   }
   export default defineComponent({
     setup() {
-      useInitChart(option, 'echarts-bar')
-      return {}
+      const bar = useInitChart(option, 'echarts-bar')
+      return {
+        bar,
+      }
     },
   })
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="echarts-rose" id="echarts-rose"></div>
+  <div class="echarts-rose" id="echarts-rose" ref="rose"></div>
 </template>
 
 <script lang="ts">
@@ -39,8 +39,10 @@
   }
   export default defineComponent({
     setup() {
-      useInitChart(option, 'echarts-rose')
-      return {}
+      const rose = useInitChart(option)
+      return {
+        rose,
+      }
     },
   })
 </script>

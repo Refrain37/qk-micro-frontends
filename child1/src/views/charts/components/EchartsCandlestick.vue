@@ -1,5 +1,9 @@
 <template>
-  <div class="echarts-candlestick" id="echarts-candlestick"></div>
+  <div
+    class="echarts-candlestick"
+    id="echarts-candlestick"
+    ref="candlestick"
+  ></div>
 </template>
 
 <script lang="ts">
@@ -25,8 +29,10 @@
   }
   export default defineComponent({
     setup() {
-      useInitChart(option, 'echarts-candlestick')
-      return {}
+      const candlestick = useInitChart(option, 'echarts-candlestick')
+      return {
+        candlestick,
+      }
     },
   })
 </script>

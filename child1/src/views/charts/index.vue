@@ -1,7 +1,7 @@
 <template>
   <div class="charts-container">
     <h1 class="title">Echarts</h1>
-    <div class="chart-list" id="chart-list">
+    <div class="chart-list" ref="chartListRef">
       <Line class="line card" ref="lineRef"></Line>
       <Rose class="rose card" ref="roseRef"></Rose>
       <Candlestick class="candlestick card" ref="candlestickRef"></Candlestick>
@@ -11,12 +11,12 @@
 </template>
 
 <script lang="ts">
-  import { Component, defineComponent, inject, onMounted, ref } from 'vue'
+  import { defineComponent, inject, onBeforeUnmount, onMounted, ref } from 'vue'
   import Line from './components/EchatsLine.vue'
   import Rose from './components/EchartsRose.vue'
   import Bar from './components/EchartsBar.vue'
   import Candlestick from './components/EchartsCandlestick.vue'
-  import { onElementResize } from '../../utils/resize'
+  import { onElementResize, rmAllElementResize } from '../../utils/resize'
 
   export default defineComponent({
     components: {
@@ -27,29 +27,47 @@
     },
     setup() {
       const echarts: any = inject('echarts')
+      const chartListRef = ref<any>(null)
       const lineRef = ref<any>(null)
       const roseRef = ref<any>(null)
       const candlestickRef = ref<any>(null)
       const barRef = ref<any>(null)
 
+      let line: any = null,
+        rose: any = null,
+        candlestick: any = null,
+        bar: any = null
+
       onMounted(() => {
-        const line = echarts.getInstanceByDom(lineRef.value.$el)
-        const rose = echarts.getInstanceByDom(roseRef.value.$el)
-        const candlestick = echarts.getInstanceByDom(candlestickRef.value.$el)
-        const bar = echarts.getInstanceByDom(barRef.value.$el)
+        line = echarts.getInstanceByDom(lineRef.value.$el)
+        rose = echarts.getInstanceByDom(roseRef.value.$el)
+        candlestick = echarts.getInstanceByDom(candlestickRef.value.$el)
+        bar = echarts.getInstanceByDom(barRef.value.$el)
+
+        const instanceLsit = [line, rose, candlestick, bar]
         const option = {
           animation: {
             duration: 1500,
           },
         }
-        onElementResize('chart-list', () => {
-          // line.resize(option)
-          // rose.resize(option)
-          // candlestick.resize(option)
-          // bar.resize(option)
+
+        onElementResize(chartListRef.value, () => {
+          instanceLsit.forEach((item, index) => {
+            setTimeout(() => {
+              item.resize(option)
+            }, (index + 1) * 200)
+          })
         })
       })
+      onBeforeUnmount(() => {
+        line = null
+        rose = null
+        candlestick = null
+        bar = null
+        rmAllElementResize(chartListRef.value)
+      })
       return {
+        chartListRef,
         lineRef,
         roseRef,
         candlestickRef,
