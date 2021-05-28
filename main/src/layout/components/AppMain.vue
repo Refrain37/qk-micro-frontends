@@ -2,7 +2,7 @@
   <section class="appMain-container">
     <router-view />
     <!-- micro start -->
-    <div id="subapp-container"></div>
+    <div id="subapp-container" class="subapp-container"></div>
     <!-- micro end -->
   </section>
 </template>
@@ -24,5 +24,9 @@ export default defineComponent({
   position: relative;
   overflow: hidden;
   background-color: $appMainBgColor;
+  .subapp-container {
+    height: 100%;
+    width: 100%;
+  }
 }
 </style>
