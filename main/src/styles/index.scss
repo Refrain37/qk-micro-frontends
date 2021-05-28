@@ -10,5 +10,6 @@ a {
 }
 
 .transition {
+    will-change: transform;
     transition: all .3s;
 }

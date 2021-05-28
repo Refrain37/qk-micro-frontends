@@ -3,7 +3,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, inject, onMounted } from 'vue'
+  import { defineComponent } from 'vue'
+  import { useInitChart } from '../../../hooks/initChart'
+
   const option = {
     legend: {
       top: 'bottom',
@@ -37,11 +39,7 @@
   }
   export default defineComponent({
     setup() {
-      const echarts: any = inject('echarts')
-      onMounted(() => {
-        const mychart = echarts.init(document.getElementById('echarts-rose'))
-        mychart && mychart.setOption(option)
-      })
+      useInitChart(option, 'echarts-rose')
       return {}
     },
   })

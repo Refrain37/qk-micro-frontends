@@ -41,6 +41,7 @@ $width: v-bind(width);
   min-height: 100vh;
   .sidebar {
     width: $width;
+    will-change: transform;
   }
   .main-container {
     display: flex;
