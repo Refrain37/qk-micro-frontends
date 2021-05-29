@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onMounted } from 'vue'
+  import { defineComponent, onMounted, ref } from 'vue'
   import { Scene, LineLayer } from '@antv/l7'
   import { GaodeMap } from '@antv/l7-maps'
 
@@ -42,7 +42,11 @@
               scene.addLayer(layer)
             })
         })
+        scene.on('resize', () => {
+          console.log('resize')
+        })
       })
+
       return {}
     },
   })
@@ -51,10 +55,12 @@
 <style scoped lang="scss">
   .map-path-animation {
     height: 500px;
-    width: 100%;
+    width: 1100px;
     position: relative;
     overflow: hidden;
     margin-top: 20px;
     will-change: transform;
+    content-visibility: auto;
+    transition: all 0.5s;
   }
 </style>
