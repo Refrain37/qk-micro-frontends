@@ -10,10 +10,12 @@
     "dependencies": {
         "@antv/l7": "^2.3.10",
         "@antv/l7-maps": "^2.3.10",
+        "@kangc/v-md-editor": "^2.3.1",
         "axios": "^0.21.1",
         "core-js": "^3.6.5",
         "echarts": "^5.1.1",
         "element-resize-detector": "^1.2.2",
+        "highlight.js": "^10.7.2",
         "qiankun": "^2.4.0",
         "vue": "^3.0.0",
         "vue-router": "^4.0.0-0",

@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/map/index.vue'),
   },
   {
+    path: '/articles/editor',
+    name: 'articleEditor',
+    component: () => import('../views/articleEditor/index.vue'),
+  },
+  {
     path: '/test',
     name: 'test',
     // route level code-splitting
