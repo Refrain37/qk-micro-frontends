@@ -8,9 +8,11 @@
         "test": "jest"
     },
     "dependencies": {
+        "@ant-design/icons-vue": "^6.0.1",
         "@antv/l7": "^2.3.10",
         "@antv/l7-maps": "^2.3.10",
         "@kangc/v-md-editor": "^2.3.1",
+        "ant-design-vue": "^2.1.6",
         "axios": "^0.21.1",
         "core-js": "^3.6.5",
         "echarts": "^5.1.1",

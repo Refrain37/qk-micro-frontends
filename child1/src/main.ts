@@ -8,12 +8,14 @@ export { bootstrap, mount, unmount } from './micro'
 import './styles/index.scss'
 
 import VueMarkdownEditor from './utils/markdownEditor'
+import Antd from './utils/antDesign'
 
 export function render(props: any = {}) {
   const { container } = props
   createApp(App)
     .use(store)
     .use(router)
+    .use(Antd)
     .use(VueMarkdownEditor)
     .mount(
       container
