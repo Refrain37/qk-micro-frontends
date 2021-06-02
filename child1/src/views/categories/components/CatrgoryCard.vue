@@ -26,20 +26,20 @@
     <!-- children start -->
     <a-card-grid
       style="width: 25%; text-align: center"
-      v-for="(child, index) in item.children"
+      v-for="(subcat, index) in item.subcategories"
       :key="index"
     >
-      <div class="child-cat">
+      <div class="subcat-item">
         <a-popconfirm
           title="Are you sure delete this category?"
           ok-text="Yes"
           cancel-text="No"
-          @confirm="confirm('comfirm', child.id)"
+          @confirm="confirm('comfirm', subcat.id)"
           @cancel="cancel"
         >
           <CloseCircleOutlined class="delete" v-show="isSetting" />
         </a-popconfirm>
-        <span>{{ child.name }}</span>
+        <span>{{ subcat.name }}</span>
       </div>
     </a-card-grid>
     <!-- add start -->
@@ -62,7 +62,7 @@
   interface IItem {
     name: string
     id: number
-    children?: any[]
+    subcategories: any[]
   }
 
   export default defineComponent({
@@ -108,11 +108,11 @@
 
   function useDeleteHandle(context: any, item: IItem) {
     const { id } = item
-    const confirm = (e: MouseEvent, childId?: number) => {
-      if (childId && typeof childId === 'number') {
-        item.children =
-          item.children &&
-          item.children.filter((item: IItem) => item.id !== childId)
+    const confirm = (e: MouseEvent, subcatId?: number) => {
+      if (subcatId && typeof subcatId === 'number') {
+        item.subcategories =
+          item.subcategories &&
+          item.subcategories.filter((item: any) => item.id !== subcatId)
       } else {
         context.emit('deleteCat', id)
       }
@@ -136,9 +136,9 @@
     const confirmAdd = () => {
       const newItem = {
         name: newCat.value,
-        id: item.children[item.children.length - 1].id + 1,
+        id: item.subcategories[item.subcategories.length - 1].id + 1,
       }
-      item.children.push(newItem)
+      item.subcategories.push(newItem)
       newCat.value = ''
       isAdding.value = false
     }
@@ -162,7 +162,7 @@
       margin-left: 10px;
     }
   }
-  .child-cat {
+  .subcat-item {
     position: relative;
     .delete {
       position: absolute;
