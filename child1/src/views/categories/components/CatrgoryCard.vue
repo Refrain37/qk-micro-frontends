@@ -42,9 +42,14 @@
         <span>{{ child.name }}</span>
       </div>
     </a-card-grid>
-    <a-card-grid style="width: 25%; text-align: center" v-if="isSetting"
-      ><PlusOutlined class="add"
-    /></a-card-grid>
+    <!-- add start -->
+    <a-card-grid style="width: 25%; text-align: center" v-if="isSetting">
+      <PlusOutlined class="add" @click="add" />
+    </a-card-grid>
+    <a-modal :title="item.name" v-model:visible="isAdding" @ok="confirmAdd">
+      <a-input v-model:value="newCat" placeholder="add new category" />
+    </a-modal>
+    <!-- add end -->
     <!-- children end -->
   </a-card>
 </template>
@@ -72,12 +77,19 @@
     setup(props, context) {
       const { isSetting, setHandle } = useSetHandle()
       const { confirm, cancel } = useDeleteHandle(context, props.item as IItem)
+      const { isAdding, add, confirmAdd, newCat } = useAddHandle(
+        props.item as IItem
+      )
 
       return {
         isSetting,
         setHandle,
         confirm,
         cancel,
+        isAdding,
+        add,
+        confirmAdd,
+        newCat,
       }
     },
   })
@@ -114,9 +126,33 @@
       cancel,
     }
   }
+
+  function useAddHandle(item: IItem) {
+    const isAdding = ref<boolean>(false)
+    const newCat = ref<string>('')
+    const add = () => {
+      isAdding.value = true
+    }
+    const confirmAdd = () => {
+      const newItem = {
+        name: newCat.value,
+        id: item.children[item.children.length - 1].id + 1,
+      }
+      item.children.push(newItem)
+      newCat.value = ''
+      isAdding.value = false
+    }
+
+    return {
+      isAdding,
+      add,
+      confirmAdd,
+      newCat,
+    }
+  }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .options {
     width: 30%;
     display: flex;

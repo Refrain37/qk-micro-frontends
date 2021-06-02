@@ -24,9 +24,5 @@ const routerConfig: RegistrableApp<ObjectType>[] = [
 
 export function microInit() {
   registerMicroApps(routerConfig)
-  start({
-    sandbox: {
-      experimentalStyleIsolation: true
-    }
-  })
+  start()
 }
