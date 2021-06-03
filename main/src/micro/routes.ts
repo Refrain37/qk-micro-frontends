@@ -39,6 +39,7 @@ const child1Routes: IRoute[] = [
       }
     ]
   },
+
   {
     name: 'Category',
     path: '/child1/category',
@@ -48,9 +49,27 @@ const child1Routes: IRoute[] = [
     }
   },
   {
+    name: 'child1-article',
+    meta: {
+      title: 'Article',
+      index: '4',
+      icon: 'el-icon-notebook-2'
+    },
+    children: [
+      {
+        name: 'editor',
+        path: '/child1/article/editor',
+        meta: {
+          index: '4-1',
+          icon: 'el-icon-edit'
+        }
+      }
+    ]
+  },
+  {
     name: 'child1-data',
     meta: {
-      index: '4',
+      index: '5',
       title: 'Data visualization',
       icon: 'el-icon-s-marketing'
     },
@@ -59,7 +78,7 @@ const child1Routes: IRoute[] = [
         name: 'charts',
         path: '/child1/data/charts',
         meta: {
-          index: '4-1',
+          index: '5-1',
           icon: 'el-icon-pie-chart'
         }
       },
@@ -67,7 +86,7 @@ const child1Routes: IRoute[] = [
         name: 'map',
         path: '/child1/data/map',
         meta: {
-          index: '4-2',
+          index: '5-2',
           icon: 'el-icon-guide'
         }
       }
