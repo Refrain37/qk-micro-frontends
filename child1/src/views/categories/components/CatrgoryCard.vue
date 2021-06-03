@@ -59,10 +59,14 @@
   import { message } from 'ant-design-vue'
   import { CloseCircleOutlined, PlusOutlined } from '@ant-design/icons-vue'
 
-  interface IItem {
+  export interface ISubCat {
+    id: number
+    name: string
+  }
+  export interface IItem {
     name: string
     id: number
-    subcategories: any[]
+    subcategories: ISubCat[]
   }
 
   export default defineComponent({
@@ -112,7 +116,7 @@
       if (subcatId && typeof subcatId === 'number') {
         item.subcategories =
           item.subcategories &&
-          item.subcategories.filter((item: any) => item.id !== subcatId)
+          item.subcategories.filter((item: ISubCat) => item.id !== subcatId)
       } else {
         context.emit('deleteCat', id)
       }
