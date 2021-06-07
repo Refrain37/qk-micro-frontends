@@ -24,6 +24,7 @@
       @ok="confirmRelease"
       width="50%"
     >
+      <!-- category start -->
       <a-form :label-col="{ span: 4 }" :wrapper-col="{ span: 14 }">
         <a-form-item label="category">
           <a-select
@@ -39,9 +40,19 @@
             </a-select-option>
           </a-select>
         </a-form-item>
+        <!-- category end -->
+        <!-- cover start -->
         <a-form-item label="cover">
-          cover
+          <upload-img
+            class="cover-uploader"
+            name="cover"
+            :imgURL="formState.cover"
+            @change="handleChange"
+            :beforeUpload="beforeUpload"
+          ></upload-img>
         </a-form-item>
+        <!-- cover end -->
+        <!-- series start -->
         <a-form-item label="series">
           <a-select
             size="large"
@@ -55,6 +66,8 @@
             </a-select-option>
           </a-select>
         </a-form-item>
+        <!-- series end -->
+        <!-- abstract start -->
         <a-form-item label="abstract">
           <a-textarea
             v-model:value="formState.abstract"
@@ -63,16 +76,17 @@
             :maxlength="100"
           />
         </a-form-item>
+        <!-- abstract end -->
       </a-form>
     </a-modal>
-
     <!-- model end -->
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, reactive, ref, UnwrapRef } from 'vue'
-  import MarkdownEditor from '../../components/MarkdowmEditor.vue'
+  import MarkdownEditor from '../../components/MarkdownEditor/index.vue'
+  import UploadImg from '../../components/Upload/index.vue'
 
   interface IFormState {
     title: string
@@ -86,6 +100,7 @@
   export default defineComponent({
     components: {
       MarkdownEditor,
+      UploadImg,
     },
     setup() {
       const { formState, handleSelectCats, handleSelectSeries } = useFormState()
@@ -93,6 +108,7 @@
         formState
       )
       const { handleUploadImage, handleSave } = useMarkDownEditor(formState)
+      const { handleChange, beforeUpload } = useUploadCover(formState)
       return {
         formState,
         handleSelectCats,
@@ -102,16 +118,19 @@
         isReleasing,
         handleRelease,
         confirmRelease,
+        handleChange,
+        beforeUpload,
       }
     },
   })
 
+  // formState
   function useFormState() {
     const formState: UnwrapRef<IFormState> = reactive<IFormState>({
       title: '',
       content: '',
       categories: [],
-      cover: undefined,
+      cover: '',
       series: undefined,
       abstract: undefined,
     })
@@ -143,6 +162,20 @@
       isReleasing,
       handleRelease,
       confirmRelease,
+    }
+  }
+
+  // upload cover
+  function useUploadCover(formState: IFormState) {
+    const handleChange = (url: string) => {
+      formState.cover = url
+    }
+
+    const beforeUpload = () => {}
+
+    return {
+      handleChange,
+      beforeUpload,
     }
   }
 
@@ -181,5 +214,10 @@
     .markdown-editor {
       height: calc(100% - #{$headerHeight});
     }
+  }
+</style>
+<style lang="scss">
+  .cover-uploader > .ant-upload {
+    width: 300px;
   }
 </style>
