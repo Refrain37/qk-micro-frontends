@@ -16,6 +16,7 @@
       @uploadImg="handleUploadImage"
       @save="handleSave"
     ></markdown-editor>
+
     <!-- model start -->
     <a-modal
       title="Release Article"
@@ -35,8 +36,11 @@
             placeholder="Please select the category..."
             @change="handleSelectCats"
           >
-            <a-select-option v-for="i in 25" :key="(i + 9).toString(36) + i">
-              {{ (i + 9).toString(36) + i }}
+            <a-select-option
+              v-for="cat in articleCats.subcategories"
+              :key="cat.id"
+            >
+              {{ cat.name }}
             </a-select-option>
           </a-select>
         </a-form-item>
@@ -61,8 +65,8 @@
             placeholder="Please select the series..."
             @change="handleSelectSeries"
           >
-            <a-select-option v-for="i in 25" :key="(i + 9).toString(36) + i">
-              {{ (i + 9).toString(36) + i }}
+            <a-select-option v-for="cat in series.subcategories" :key="cat.id">
+              {{ cat.name }}
             </a-select-option>
           </a-select>
         </a-form-item>
@@ -84,18 +88,17 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, ref, UnwrapRef } from 'vue'
+  import {
+    defineComponent,
+    onMounted,
+    reactive,
+    ref,
+    toRefs,
+    UnwrapRef,
+  } from 'vue'
   import MarkdownEditor from '../../components/MarkdownEditor/index.vue'
   import UploadImg from '../../components/Upload/index.vue'
-
-  interface IFormState {
-    title: string
-    categories: string[]
-    content: string
-    cover?: string
-    series?: string
-    abstract?: string
-  }
+  import { fetchCategories } from '../../apis/category'
 
   export default defineComponent({
     components: {
@@ -104,13 +107,16 @@
     },
     setup() {
       const { formState, handleSelectCats, handleSelectSeries } = useFormState()
+      const cats = useFetchCats()
       const { isReleasing, handleRelease, confirmRelease } = useReleaseHandle(
-        formState
+        formState,
+        cats
       )
       const { handleUploadImage, handleSave } = useMarkDownEditor(formState)
       const { handleChange, beforeUpload } = useUploadCover(formState)
       return {
         formState,
+        ...toRefs(cats),
         handleSelectCats,
         handleSelectSeries,
         handleUploadImage,
@@ -125,6 +131,14 @@
   })
 
   // formState
+  interface IFormState {
+    title: string
+    categories: string[]
+    content: string
+    cover?: string
+    series?: string
+    abstract?: string
+  }
   function useFormState() {
     const formState: UnwrapRef<IFormState> = reactive<IFormState>({
       title: '',
@@ -148,14 +162,50 @@
     }
   }
 
+  // fetch cats
+  const ARTICLE_CAT_ID = 1
+  const SERIES_CAT_ID = 2
+  interface ICats {
+    articleCats: []
+    series: []
+  }
+
+  function useFetchCats() {
+    const cats: UnwrapRef<ICats> = reactive({
+      articleCats: [],
+      series: [],
+    })
+    onMounted(async () => {
+      const [res1, res2] = await Promise.all([
+        fetchCategories(ARTICLE_CAT_ID),
+        fetchCategories(SERIES_CAT_ID),
+      ])
+      cats.articleCats = res1.data.data.list[ARTICLE_CAT_ID]
+      cats.series = res2.data.data.list[SERIES_CAT_ID]
+    })
+
+    return cats
+  }
+
   // release
-  function useReleaseHandle(formState: IFormState) {
+  function useReleaseHandle(formState: IFormState, cats: ICats) {
     const isReleasing = ref<boolean>(false)
     const handleRelease = () => {
       isReleasing.value = true
     }
     const confirmRelease = () => {
       console.log('release', formState)
+      // request
+      // clear
+      formState.title = ''
+      formState.content = ''
+      formState.categories = []
+      formState.cover = ''
+      formState.series = ''
+      formState.abstract = ''
+      cats.articleCats = []
+      cats.series = []
+      isReleasing.value = false
     }
 
     return {
@@ -180,7 +230,7 @@
   }
 
   // markdown-editor
-  function useMarkDownEditor(state: IFormState) {
+  function useMarkDownEditor(formState: IFormState) {
     const handleUploadImage = (event: any, insertImage: any, files: any[]) => {
       console.log(files, 'parent')
     }
