@@ -90,6 +90,7 @@
 <script lang="ts">
   import {
     defineComponent,
+    onBeforeMount,
     onMounted,
     reactive,
     ref,
@@ -98,7 +99,9 @@
   } from 'vue'
   import MarkdownEditor from '../../components/MarkdownEditor/index.vue'
   import UploadImg from '../../components/Upload/index.vue'
+  import { fetchArticles, editArticle } from '../../apis/article'
   import { fetchCategories } from '../../apis/category'
+  import { useRoute } from 'vue-router'
 
   export default defineComponent({
     components: {
@@ -107,6 +110,7 @@
     },
     setup() {
       const { formState, handleSelectCats, handleSelectSeries } = useFormState()
+      useFetchData(formState)
       const cats = useFetchCats()
       const { isReleasing, handleRelease, confirmRelease } = useReleaseHandle(
         formState,
@@ -132,6 +136,7 @@
 
   // formState
   interface IFormState {
+    id?: number
     title: string
     categories: string[]
     content: string
@@ -160,6 +165,29 @@
       handleSelectCats,
       handleSelectSeries,
     }
+  }
+
+  // fetch data
+  function useFetchData(formState: IFormState) {
+    const route = useRoute()
+    onBeforeMount(async () => {
+      try {
+        const { id } = route.query
+        if (id) {
+          const res = await fetchArticles({ id })
+          const data: IFormState = res.data.data.list[0] // todo
+          formState.id = data.id
+          formState.title = data.title
+          formState.content = data.content
+          formState.categories = data.categories
+          formState.cover = data.cover
+          formState.series = data.series
+          formState.abstract = data.abstract
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    })
   }
 
   // fetch cats
@@ -193,19 +221,20 @@
     const handleRelease = () => {
       isReleasing.value = true
     }
-    const confirmRelease = () => {
-      console.log('release', formState)
-      // request
-      // clear
-      formState.title = ''
-      formState.content = ''
-      formState.categories = []
-      formState.cover = ''
-      formState.series = ''
-      formState.abstract = ''
-      cats.articleCats = []
-      cats.series = []
-      isReleasing.value = false
+    const confirmRelease = async () => {
+      const res = await editArticle(formState)
+      if (res.status === 200 && res.data.isOk === 1) {
+        // clear
+        formState.title = ''
+        formState.content = ''
+        formState.categories = []
+        formState.cover = ''
+        formState.series = ''
+        formState.abstract = ''
+        cats.articleCats = []
+        cats.series = []
+        isReleasing.value = false
+      }
     }
 
     return {

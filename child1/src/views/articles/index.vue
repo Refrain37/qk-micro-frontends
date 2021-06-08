@@ -52,6 +52,7 @@
 
 <script lang="ts">
   import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+  import { useRouter } from 'vue-router'
   import { fetchArticles, delArticle } from '../../apis/article'
   import { notification } from 'ant-design-vue'
   import { BookOutlined } from '@ant-design/icons-vue'
@@ -189,7 +190,15 @@
 
   // edit
   function useEditHandle() {
-    const editHandle = (id: number) => {}
+    const router = useRouter()
+    const editHandle = (id: number) => {
+      router.push({
+        path: '/article/editor',
+        query: {
+          id,
+        },
+      })
+    }
 
     return {
       editHandle,
@@ -211,7 +220,7 @@
           })
         }
       } catch (error) {
-        throw error
+        console.log(error)
       }
     }
 
