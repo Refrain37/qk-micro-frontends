@@ -7,6 +7,7 @@
       :data-source="list"
       :loading="loading"
       :scroll="{ x: 1800, y: 500 }"
+      bordered
     >
       <template #time="{text:time}">
         {{ parseTime(time, '{y}-{m}-{d}') }}
@@ -58,7 +59,6 @@
   import { notification } from 'ant-design-vue'
   import { BookOutlined } from '@ant-design/icons-vue'
   import { parseTime } from '../../utils'
-
   const colors = ['red', 'blue', 'orange', 'green', 'purple', 'purple']
 
   const columns = [
@@ -73,7 +73,7 @@
     },
     {
       title: 'Title',
-      width: 150,
+      width: 200,
       dataIndex: 'title',
       key: 'title',
       align: 'center',
@@ -95,14 +95,13 @@
       dataIndex: 'categories',
       key: 'categories',
       align: 'center',
-      width: 150,
+      width: 200,
       slots: { customRender: 'categories' },
     },
     {
       title: 'Content',
       dataIndex: 'content',
       key: 'content',
-      width: 200,
       align: 'center',
       ellipsis: true,
     },
@@ -236,7 +235,6 @@
 
 <style scoped lang="scss">
   .article-list-container {
-    padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -250,6 +248,14 @@
         flex-direction: row;
         justify-content: space-around;
       }
+    }
+  }
+</style>
+<style lang="scss">
+  .article-list {
+    .ant-table-pagination.ant-pagination {
+      float: none !important;
+      text-align: center !important;
     }
   }
 </style>

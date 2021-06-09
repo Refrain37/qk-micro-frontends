@@ -53,15 +53,23 @@ const child1Routes: IRoute[] = [
     meta: {
       title: 'Article',
       index: '4',
-      icon: 'el-icon-notebook-2'
+      icon: 'el-icon-notebook-1'
     },
     children: [
+      {
+        name: 'list',
+        path: '/child1/article/list',
+        meta: {
+          index: '4-1',
+          icon: 'el-icon-notebook-2'
+        }
+      },
       {
         name: 'editor',
         path: '/child1/article/editor',
         meta: {
-          index: '4-1',
-          icon: 'el-icon-edit'
+          index: '4-2',
+          icon: 'el-icon-edit-outline'
         }
       }
     ]
