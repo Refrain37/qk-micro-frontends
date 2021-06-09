@@ -3,7 +3,7 @@ import { getGlobalState, updateGlobalState } from '../../micro/state'
 import { getToken, deleteToken, setToken } from '../../utils/auth'
 
 interface IUserState {
-  token: string
+  token: string | undefined
   username: string
   avatar: string
   email: string
@@ -12,7 +12,7 @@ interface IUserState {
 }
 
 const state: IUserState = {
-  token: '',
+  token: getToken(),
   username: '',
   avatar: '',
   email: '',
@@ -59,6 +59,11 @@ const actions = {
   },
   async getInfo({ commit, state }: any) {
     try {
+      // check globalState
+      if (!getGlobalState('token')) {
+        updateGlobalState('token', state.token)
+      }
+
       const res = await getInfo()
       const data = res.data.data
       updateGlobalState('userInfo', JSON.stringify(data)) // update globalState
