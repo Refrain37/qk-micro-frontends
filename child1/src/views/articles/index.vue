@@ -5,6 +5,7 @@
       class="article-list"
       :columns="columns"
       :data-source="list"
+      :loading="loading"
       :scroll="{ x: 1800, y: 500 }"
     >
       <template #time="{text:time}">
@@ -152,6 +153,7 @@
   }
   interface IState {
     list: IArticle[]
+    loading: boolean
   }
 
   export default defineComponent({
@@ -161,6 +163,7 @@
     setup() {
       const state: IState = reactive({
         list: [],
+        loading: true,
       })
       useFetchList(state) // fetch list
       const { editHandle } = useEditHandle()
@@ -185,6 +188,7 @@
         item.key = item.id + ''
         return item
       })
+      state.loading = false
     })
   }
 
