@@ -15,29 +15,12 @@ export interface IRoute {
 const child1Routes: IRoute[] = [
   {
     name: 'child1-home',
+    path: '/child1/',
     meta: {
       index: '2',
       title: 'child1-home',
-      icon: 'el-icon-upload'
-    },
-    children: [
-      {
-        name: 'child1',
-        path: '/child1/',
-        meta: {
-          index: '2-1',
-          icon: 'el-icon-picture-outline'
-        }
-      },
-      {
-        name: 'child1-bbb',
-        path: '/child1/bbb',
-        meta: {
-          index: '2-2',
-          icon: 'el-icon-picture'
-        }
-      }
-    ]
+      icon: 'el-icon-s-home'
+    }
   },
 
   {
