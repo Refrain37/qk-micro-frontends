@@ -9,6 +9,7 @@ interface IUserState {
   email: string
   github: string
   introduction: string
+  skills: string[]
 }
 
 const state: IUserState = {
@@ -17,7 +18,8 @@ const state: IUserState = {
   avatar: '',
   email: '',
   github: '',
-  introduction: ''
+  introduction: '',
+  skills: []
 }
 
 const mutations = {
@@ -38,6 +40,9 @@ const mutations = {
   },
   SET_INTRODUCTION(state: IUserState, introduction: string) {
     state.introduction = introduction
+  },
+  SET_SKILLS(state: IUserState, skills: string[]) {
+    state.skills = skills
   }
 }
 
@@ -69,12 +74,13 @@ const actions = {
       updateGlobalState('userInfo', JSON.stringify(data)) // update globalState
 
       // commit
-      const { username, avatar, email, github, introduction } = data
+      const { username, avatar, email, github, introduction, skills } = data
       commit('SET_USERNAME', username)
       commit('SET_AVATAR', avatar)
       commit('SET_EMAIL', email)
       commit('SET_GITHUB', github)
       commit('SET_INTRODUCTION', introduction)
+      commit('SET_SKILLS', skills)
 
       return data
     } catch (error) {
@@ -96,6 +102,7 @@ const actions = {
       commit('SET_EMAIL', '')
       commit('SET_GITHUB', '')
       commit('SET_INTRODUCTION', '')
+      commit('SET_SKILLS', [])
 
       return res.data.data
     } catch (error) {

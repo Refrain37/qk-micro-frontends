@@ -15,6 +15,11 @@ export const routes: Array<RouteRecordRaw> = [
       index: '1',
       icon: 'el-icon-tickets'
     }
+  },
+  {
+    path: '/myprofile',
+    name: 'Myprofile',
+    component: () => import('../views/myProfile/index.vue')
   }
 ]
 

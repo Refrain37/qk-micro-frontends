@@ -6,6 +6,7 @@
       label-position="left"
       label-width="100px"
     >
+      <h1>Global State</h1>
       <el-form-item label="user">
         <div class="item-body">
           <el-input v-model="globalState.user"></el-input>
@@ -183,6 +184,9 @@ function useAddHandle() {
     margin-top: 30px;
     padding: 40px 50px 10px;
     background-color: #fff;
+    & > h1 {
+      margin-bottom: 20px;
+    }
     .item-body {
       display: flex;
       flex-direction: row;

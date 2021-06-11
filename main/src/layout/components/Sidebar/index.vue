@@ -11,7 +11,9 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>test</el-dropdown-item>
+            <el-dropdown-item @click="navigate(Path.myprofile)"
+              >My Profile</el-dropdown-item
+            >
             <el-dropdown-item>Settings</el-dropdown-item>
             <el-dropdown-item divided>
               <span @click="handleLogout">Log out</span>
@@ -54,6 +56,10 @@ import { getRoutes } from '../../../utils/getRoutes'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
+enum Path {
+  myprofile = '/myprofile'
+}
+
 export default defineComponent({
   components: {
     SidebarItem
@@ -62,6 +68,7 @@ export default defineComponent({
     const routes: IRoute[] = reactive(getRoutes()) // getRoutes
     const store = useStore()
     const isCollapse = computed(() => !store.getters.isOpened)
+    const navigate = useNavigate()
 
     const { username, avatar } = useGetInfo()
     const handleLogout = useHandleLogout()
@@ -70,7 +77,9 @@ export default defineComponent({
       isCollapse,
       username,
       avatar,
-      handleLogout
+      handleLogout,
+      navigate,
+      Path
     }
   }
 })
@@ -83,6 +92,15 @@ function useGetInfo() {
     username,
     avatar
   }
+}
+
+function useNavigate() {
+  const router = useRouter()
+  const navigate = (path: string) => {
+    router.push(path)
+  }
+
+  return navigate
 }
 
 function useHandleLogout() {
