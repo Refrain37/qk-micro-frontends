@@ -32,7 +32,12 @@
         </div>
         <h1 class="username">{{ userInfo.username }}</h1>
         <div class="skills">
-          <el-tag v-for="skill in userInfo.skills" :key="skill" effect="dark">
+          <el-tag
+            class="skill"
+            v-for="skill in userInfo.skills"
+            :key="skill"
+            effect="dark"
+          >
             {{ skill }}
           </el-tag>
         </div>
@@ -42,13 +47,69 @@
     <!-- myprofile-card end -->
 
     <!-- form start -->
-
+    <el-form
+      class="myprofile-form"
+      :model="userInfo"
+      label-position="top"
+      :inline="true"
+    >
+      <h1>Edit Myprofile</h1>
+      <el-form-item class="item" label="username">
+        <el-input
+          v-model="userInfo.username"
+          maxlength="12"
+          show-word-limit
+          style="width:50%;"
+        ></el-input>
+      </el-form-item>
+      <el-form-item class="item" label="avatar">
+        <el-input v-model="userInfo.avatar" style="width:70%;"></el-input>
+      </el-form-item>
+      <el-form-item label="skills" class="item skills">
+        <el-select
+          v-model="userInfo.skills"
+          multiple
+          filterable
+          allow-create
+          default-first-option
+          placeholder="skills"
+          style="width:50%;"
+        >
+          <el-option
+            v-for="item in userInfo.skills"
+            :key="item"
+            :label="item"
+            :value="item"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="guthub">
+        <el-input v-model="userInfo.github"></el-input>
+      </el-form-item>
+      <el-form-item label="email">
+        <el-input v-model="userInfo.email"></el-input>
+      </el-form-item>
+      <el-form-item label="introduction" class="item">
+        <el-input
+          type="textarea"
+          :rows="3"
+          maxlength="100"
+          show-word-limit
+          v-model="userInfo.introduction"
+          style="width:70%;"
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary">Update</el-button>
+      </el-form-item>
+    </el-form>
     <!-- form end -->
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, reactive } from 'vue'
 import { useStore } from 'vuex'
 
 export default defineComponent({
@@ -103,6 +164,8 @@ function useGetUserInfo() {
 .myprofile-container {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  padding: 45px;
   /* myprofile-card start */
   .myprofile-card {
     display: flex;
@@ -186,8 +249,11 @@ function useGetUserInfo() {
         flex-direction: row;
         align-items: center;
         flex-wrap: wrap;
-        margin-top: 20px;
+        margin-top: 10px;
         justify-content: space-around;
+        .skill {
+          margin-top: 10px;
+        }
       }
       .introduction {
         margin-top: 20px;
@@ -196,5 +262,16 @@ function useGetUserInfo() {
     }
   }
   /* myprofile-card end */
+  /* myprofile-form start */
+  .myprofile-form {
+    flex: 1;
+    margin-left: 30px;
+    padding: 20px;
+    background-color: white;
+    .item {
+      width: 100%;
+    }
+  }
+  /* myprofile-form end */
 }
 </style>
