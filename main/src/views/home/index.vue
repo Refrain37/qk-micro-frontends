@@ -71,7 +71,7 @@
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="updateHandle">Update</el-button>
+        <el-button type="primary" @click="updateHandle()">Update</el-button>
         <el-button type="primary" @click="addHandle">Add</el-button>
       </el-form-item>
     </el-form>
@@ -119,7 +119,7 @@ enum globalStateProperties {
   userInfo = 'userInfo'
 }
 function useGetGlobalState() {
-  const globalState: IGlobalState = { ...getGlobalState() }
+  const globalState: IGlobalState = reactive({ ...getGlobalState() })
   globalState.userInfo = reactive({
     ...(JSON.parse(globalState.userInfo as string) as IUserInfo)
   })
