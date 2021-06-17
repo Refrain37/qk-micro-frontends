@@ -90,7 +90,7 @@ const child2Routes: IRoute[] = [
     name: 'child2-home',
     path: '/child2/',
     meta: {
-      index: '5',
+      index: '6',
       icon: 'el-icon-paperclip'
     }
   },
@@ -98,7 +98,7 @@ const child2Routes: IRoute[] = [
     name: 'child2-show',
     path: '/child2/show',
     meta: {
-      index: '6',
+      index: '7',
       icon: 'el-icon-s-flag'
     }
   }

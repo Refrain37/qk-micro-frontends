@@ -8,6 +8,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers/rootReducer';
 
+import '@alifd/next/dist/next.css'
+
 import { isSingle } from './micro'
 export { bootstrap, mount, unmount } from './micro'
 
